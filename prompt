@@ -1,0 +1,32 @@
+THIS IS ONLY FOR CDTIRE PROTOCOL. DO NOT CHANGE OR DISTURB THE WORKFLOW OF OTHER PROTOCOLS.
+
+THIS IS THE WORKFLOW FOR CDTIRE PROTOCOL:
+
+ 1. deflection.py → generates .f (fortran) files → store in projects/{project_name}/
+
+ 2. job/old_job → fortran  → python → tydex
+
+ then abaqus commands which must be run is first run job, then old job (if job not present), then fortran file (like user=...), then python script (format: call abaqus python {python_script_name}.py {job_name} if job not present then old job's name)
+
+ 3. job/old_job → tydex (no fortran/python)
+ this case is the usual way followed by all the protocols and common with CDTire
+
+ 4. job/old_job → fortran → tydex (no python)
+  then abaqus commands which must be run is first run job, then old job (if job not present), then fortran file (like user=...).
+
+ 5. job/old_job → python → tydex (no fortran)
+  then abaqus commands which must be run is first run job, then old job (if job not present), then python script (format: call abaqus python {python_script_name}.py {job_name} if job not present then old job's name).
+
+This case is where deflection.py would be run and generates fortran files which would be used for running in other above cases.
+
+The excel of cdtire protocols/CDTire.xlsx has rows for Fortran File and Python Script. Check it. 
+
+The supporting files are all used in this.
+
+Now, this is the entire workflow of cdtire protocol. so the batch file genration of abaqus commands must be in this manner and when clicked on 'Run using batch file' in the test matrix (select.html), the test cases must run one by one by showing the status of each step in the status column of that test matrix and generate tydex file at the end as output with "Generate Tydex" button for each test cases.
+
+Also note: when giving input values in cdtire.html page values can be given for any number of those inputs according to the user's needs and rest needs to calculated from that.
+
+And all these running activities must be logged in the log file simulatenously when the user does it. 
+
+Give code and mention in which file and in which line exactly i have to add or modify. there are two things: batch file generation for cdtire with correct abaqus commands sequence and tydex file generation by the "Run using batch file" button.
